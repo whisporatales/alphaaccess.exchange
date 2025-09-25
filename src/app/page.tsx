@@ -17,6 +17,8 @@ const OracleIcon = () => <svg xmlns="http://www.w3.org/2000/svg" className="h-8 
 const VaultIcon = () => <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 mb-4 text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4" /></svg>;
 const EngineIcon = () => <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 mb-4 text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v.01M12 12v.01M12 12v- .01M12 16v.01M12 16v-.01M12 16c-1.11 0-2.08-.402-2.599-1M12 16V7m0 9c1.657 0 3-.895 3-2s-1.343-2-3-2-3-.895-3-2 1.343-2 3-2" /></svg>;
 const TokenIcon = () => <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 mb-4 text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M12 11c0 3.517-1.009 6.789-2.756 9.362m-3.603-3.603A10.003 10.003 0 0112 2c5.523 0 10 4.477 10 10 0 .273-.01.543-.031.812M12 11a3 3 0 100-6 3 3 0 000 6z" /></svg>;
+const BankingIcon = () => <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 mb-4 text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" /></svg>;
+
 
 // --- Reusable Components ---
 const FeatureCard = ({ title, children, icon }: { title: string; children: React.ReactNode; icon?: React.ReactNode }) => (
@@ -50,7 +52,7 @@ const Home = ({ setCurrentPage }: { setCurrentPage: (page: string) => void }) =>
                 The Hybrid Intelligence Exchange
             </h2>
             <p className="mt-4 text-xl sm:text-2xl text-gray-400 max-w-3xl mx-auto">
-                Merging high-performance trading with a layer of AI-driven, on-chain analytics that no one else offers. Welcome to the "Glass Box" of crypto.
+                Merging high-performance trading, on-chain analytics, and unified digital banking. Welcome to the "Glass Box" of finance.
             </p>
             <div className="mt-10 flex justify-center gap-4">
                 <button onClick={() => setCurrentPage('blueprint')} className="bg-blue-600 text-white font-semibold py-3 px-8 rounded-lg hover:bg-blue-700 transition-colors">
@@ -64,20 +66,23 @@ const Home = ({ setCurrentPage }: { setCurrentPage: (page: string) => void }) =>
 
         <section id="pillars" className="py-16">
              <h3 className="text-3xl font-bold text-center mb-12 text-white">
-                Four Pillars of Innovation
+                The Pillars of Innovation
             </h3>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-7xl mx-auto text-center">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 max-w-7xl mx-auto text-center">
                 <FeatureCard title="The Alpha Oracle" icon={<OracleIcon />}>
-                    Integrated, real-time on-chain intelligence. See what whales and smart money are doing, directly on your chart.
+                    Integrated, real-time on-chain intelligence to see what whales and smart money are doing.
                 </FeatureCard>
                  <FeatureCard title="The Strategy Vault" icon={<VaultIcon/>}>
                     The evolution of social trading. Subscribe to verifiable, on-chain strategies, not just traders.
                 </FeatureCard>
                  <FeatureCard title="Hybrid Liquidity" icon={<EngineIcon/>}>
-                    Deep CEX liquidity for major pairs and seamless, aggregated DEX access for the long-tail. All in one place.
+                    Deep CEX liquidity for major pairs and seamless, aggregated DEX access for the long-tail.
                 </FeatureCard>
                  <FeatureCard title="The $ALPHA Token" icon={<TokenIcon/>}>
-                    A utility token with a purpose. Stake for tiered access to alpha, fee reductions, and governance rights.
+                    A utility token to unlock alpha, reduce fees, and govern the platform.
+                </FeatureCard>
+                 <FeatureCard title="Unified Digital Banking" icon={<BankingIcon/>}>
+                     Pay bills, manage subscriptions, and send money globally—all powered by your crypto assets.
                 </FeatureCard>
             </div>
         </section>
@@ -88,7 +93,7 @@ const Blueprint = () => (
     <div className="py-20 sm:py-32 max-w-5xl mx-auto">
          <h2 className="text-4xl sm:text-5xl font-extrabold text-white tracking-tight text-center">The Blueprint for Alpha Access</h2>
          <p className="mt-4 text-xl text-center text-gray-400 max-w-3xl mx-auto">
-           This is what the world hasn't done yet. We're building an intelligence tool that gives traders a provable edge.
+           This is what the world hasn't done yet. We're building an intelligence tool that gives you a provable edge in markets and in life.
          </p>
          <div className="mt-20 space-y-12">
             <PillarCard title="The Alpha Oracle" icon={<OracleIcon/>} newFeature="Integrated On-Chain Intelligence">
@@ -119,13 +124,23 @@ const Blueprint = () => (
                 </ul>
                 <p className="font-semibold text-blue-300">No single exchange offers both a native, high-performance order book and seamless, integrated access to the entire on-chain market.</p>
             </PillarCard>
+            
+             <PillarCard title="Unified Digital Banking" icon={<BankingIcon/>} newFeature="The Web3 Banking Bridge">
+                <p>Existing fintech apps are siloed from your crypto life. We unify them. AlphaAccess Banking allows you to use your digital assets to interact with the real-world economy, seamlessly.</p>
+                 <ul>
+                    <li><strong>Pay Bills with Crypto:</strong> Convert gains from any asset to pay your utility bills, credit cards, or rent directly from the platform. No more complex off-ramping.</li>
+                    <li><strong>Smart Subscriptions:</strong> Manage subscriptions like Netflix or Spotify with programmable, on-chain vaults. Top up a vault and let it handle your recurring payments with full transparency.</li>
+                    <li><strong>Global Payments:</strong> Leverage stablecoins for near-instant, low-cost international payments and remittances, bypassing slow and expensive traditional banking rails.</li>
+                </ul>
+                <p className="font-semibold text-blue-300">This isn't just another digital bank. It's a bridge that makes your crypto liquid and useful for everyday life, something no competitor currently offers.</p>
+            </PillarCard>
 
              <PillarCard title="The 'Alpha Access' Token ($ALPHA)" icon={<TokenIcon/>} newFeature="A Utility Token with a Purpose">
                  <p>The platform's native token, $ALPHA, is the key to unlocking the platform's core features, creating a merit-based system.</p>
                  <ul>
                     <li><strong>Tiered Access:</strong> Staking $ALPHA unlocks tiers of data from the "Alpha Oracle" and access to top Strategy Vaults.</li>
-                    <li><strong>Fee Reduction:</strong> Pay trading fees in $ALPHA for a discount.</li>
-                    <li><strong>Governance:</strong> $ALPHA holders vote on new on-chain metrics and featured traders.</li>
+                    <li><strong>Fee Reduction:</strong> Pay trading and banking fees in $ALPHA for a discount.</li>
+                    <li><strong>Governance:</strong> $ALPHA holders vote on new on-chain metrics, banking features, and featured traders.</li>
                 </ul>
                 <p className="font-semibold text-blue-300">It turns the platform into a gamified, self-improving ecosystem that rewards skill and participation.</p>
             </PillarCard>
@@ -143,11 +158,39 @@ const About = () => (
                 At AlphaAccess, we are building the next generation of digital asset exchange. Our vision originates from a simple, yet powerful conviction: the future of finance should be open, transparent, and accessible to everyone. We're building a "Glass Box," not a black box.
             </p>
             <p>
-                Our mission is to bridge the critical gap between user-friendly centralized platforms and the powerful, sovereign world of DeFi. We are creating a hybrid intelligence platform that offers the best of both worlds—the ease of use of a traditional exchange, combined with the self-custody and transparency of DeFi, all enhanced by our unique <span className="font-bold text-blue-400">Alpha Oracle</span>. We believe you shouldn't have to choose between convenience and control.
+                Our mission is to bridge the critical gap between user-friendly centralized platforms and the powerful, sovereign world of DeFi. We are creating a hybrid intelligence platform that offers the best of both worlds—the ease of use of a traditional exchange, combined with the self-custody and transparency of DeFi, all enhanced by our unique <span className="font-bold text-blue-400">Alpha Oracle</span> and seamless <span className="font-bold text-blue-400">Digital Banking</span> integration.
             </p>
             <p>
-                AlphaAccess is more than just a trading venue; it's an intelligence tool designed to empower you with a provable edge. Join us in building a more equitable and transparent financial future.
+                AlphaAccess is more than just a trading venue; it's an all-in-one financial tool designed to empower you with a provable edge. Join us in building a more equitable and transparent financial future.
             </p>
+        </div>
+    </div>
+);
+
+const Banking = () => (
+     <div className="py-20 sm:py-32 max-w-5xl mx-auto">
+        <h2 className="text-4xl sm:text-5xl font-extrabold text-white tracking-tight text-center">Crypto-Powered Banking</h2>
+        <p className="mt-4 text-xl text-center text-gray-400">The bridge between your digital assets and your daily life. What other fintech apps can't do.</p>
+        
+        <div className="mt-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <FeatureCard title="Pay Bills, Your Way">
+               Connect your utility, credit card, and other billers. Pay them directly from your crypto balance in a few clicks. We handle the conversion seamlessly in the background.
+            </FeatureCard>
+            <FeatureCard title="Smart Subscription Manager">
+               Create a dedicated "Subscription Vault" for services like Netflix, Spotify, and more. Top it up with stablecoins and never worry about a missed payment again.
+            </FeatureCard>
+             <FeatureCard title="Global Remittances">
+               Send money across borders with near-zero fees using stablecoins. The recipient can withdraw to their local currency or hold it in their AlphaAccess account.
+            </FeatureCard>
+             <FeatureCard title="Programmable Payments">
+               Go beyond simple recurring payments. Set up rules like, "Pay my $100 phone bill on the 25th, but use the profits from my Bitcoin trade first."
+            </FeatureCard>
+            <FeatureCard title="Instant Virtual Cards">
+                Generate virtual debit cards for online shopping funded directly by your crypto portfolio. Spend your assets anywhere cards are accepted.
+            </FeatureCard>
+            <FeatureCard title="Earn Yield on Your Cash">
+               Don't let your cash sit idle. Your fiat deposits are automatically converted to yield-bearing stablecoins, so you're always earning.
+            </FeatureCard>
         </div>
     </div>
 );
@@ -159,34 +202,18 @@ const Learn = () => (
         
         <h3 className="text-2xl font-bold text-white tracking-tight mt-16 mb-8">Crypto Fundamentals</h3>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <FeatureCard title="What is Blockchain?">
-                A decentralized, distributed digital ledger used to record transactions across many computers so that records cannot be altered retroactively without the alteration of all subsequent blocks.
-            </FeatureCard>
-            <FeatureCard title="What is Bitcoin?">
-                A cryptocurrency designed to work as a medium of exchange that uses cryptography to control its creation and management, rather than relying on central authorities.
-            </FeatureCard>
-             <FeatureCard title="What is Ethereum?">
-                A decentralized, open-source blockchain with smart contract functionality. Ether (ETH) is the native cryptocurrency of the platform.
-            </FeatureCard>
-             <FeatureCard title="Understanding Gas Fees">
-                Payments made by users to compensate for the computing energy required to process and validate transactions on a blockchain.
-            </FeatureCard>
+            <FeatureCard title="What is Blockchain?">A decentralized digital ledger that records transactions securely and transparently.</FeatureCard>
+            <FeatureCard title="What is Bitcoin?">A decentralized digital currency, created in 2009, that operates without a central bank.</FeatureCard>
+             <FeatureCard title="What is Ethereum?">A decentralized platform that runs smart contracts: applications that run exactly as programmed without any possibility of downtime or fraud.</FeatureCard>
+             <FeatureCard title="Understanding Gas Fees">The fee required to successfully conduct a transaction or execute a contract on the Ethereum blockchain.</FeatureCard>
         </div>
 
         <h3 className="text-2xl font-bold text-white tracking-tight mt-20 mb-8">The AlphaAccess Edge</h3>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <FeatureCard title="On-Chain Intelligence">
-                The process of analyzing public blockchain data to uncover insights about market sentiment, whale activity, and smart money movements. AlphaAccess integrates this directly into your trading view.
-            </FeatureCard>
-            <FeatureCard title="Strategy Vaults">
-               A non-custodial smart contract that automatically executes a predefined trading strategy. Users can deposit funds to subscribe to a strategy, and its performance is fully transparent and verifiable on-chain.
-            </FeatureCard>
-             <FeatureCard title="Hybrid Liquidity">
-                A system that combines a Central Limit Order Book (CLOB) for high-speed trading of major assets with a DEX Aggregator that finds the best prices for thousands of other tokens across the DeFi ecosystem.
-            </FeatureCard>
-             <FeatureCard title="Utility Tokens ($ALPHA)">
-                A digital asset whose value is tied to its utility within a specific ecosystem. The $ALPHA token grants access to premium data, reduces fees, and gives holders a say in the platform's future.
-            </FeatureCard>
+            <FeatureCard title="On-Chain Intelligence">Analyzing public blockchain data to uncover insights about market sentiment and whale activity. AlphaAccess integrates this directly into your trading view.</FeatureCard>
+            <FeatureCard title="Strategy Vaults">Non-custodial smart contracts that automatically execute a predefined trading strategy, with fully verifiable performance on-chain.</FeatureCard>
+             <FeatureCard title="Hybrid Liquidity">A system combining a Central Limit Order Book (CLOB) for major assets with a DEX Aggregator for thousands of other tokens.</FeatureCard>
+             <FeatureCard title="Crypto-Powered Banking">Using digital assets to pay real-world bills, manage subscriptions via smart contracts, and earn yield on cash balances automatically.</FeatureCard>
         </div>
     </div>
 );
@@ -214,6 +241,8 @@ export default function Page() {
                 return <Blueprint />;
             case "about":
                 return <About />;
+            case "banking":
+                return <Banking />;
             case "learn":
                 return <Learn />;
             case "app":
@@ -251,8 +280,9 @@ export default function Page() {
                     <nav className="flex items-center gap-2 sm:gap-4">
                         <NavLink pageName="home">Home</NavLink>
                         <NavLink pageName="blueprint">Blueprint</NavLink>
-                        <NavLink pageName="about">About</NavLink>
+                        <NavLink pageName="banking">Banking</NavLink>
                         <NavLink pageName="learn">Learn</NavLink>
+                        <NavLink pageName="about">About</NavLink>
                     </nav>
                     <button
                         onClick={() => setCurrentPage('app')}
