@@ -2,48 +2,7 @@
 
 import React, { useState } from "react";
 
-// --- Data & Components from the previous step ---
-
-// Data for the comparison table
-const comparisonData = [
-    {
-        feature: "Control of Funds",
-        exchange: 'CON: You do not truly own the crypto. The exchange holds it for you. This is the infamous "Not your keys, not your crypto" principle. They can freeze your assets.',
-        wallet: "PRO: Absolute, sovereign control. You are the sole owner of your private keys and therefore your funds. No one can freeze or seize them without your keys.",
-    },
-    {
-        feature: "Security",
-        exchange: "CON: A massive, centralized target for hackers. If the exchange is compromised, your funds can be stolen (e.g., Mt. Gox, FTX).",
-        wallet: "PRO: Security is in your hands. Hardware wallets are virtually unhackable remotely. The weakest link is you (phishing, losing your seed phrase).",
-    },
-    {
-        feature: "Ease of Use & Convenience",
-        exchange: "PRO: Extremely user-friendly. Easy password recovery, simple trading interfaces, and integrated customer support. Ideal for beginners.",
-        wallet: 'CON: Higher learning curve. You are solely responsible for everything. If you lose your 12 or 24-word seed phrase, your funds are gone forever. No "Forgot Password" button.',
-    },
-    {
-        feature: "Trading & Features",
-        exchange: "PRO: High liquidity, advanced trading tools (margin, futures, options), and fast execution via order books. A one-stop-shop for buying, selling, and trading.",
-        wallet: 'CON: Trading is often done by connecting to a Decentralized Exchange (DEX), which can have lower liquidity, higher transaction fees ("gas"), and be slower. Not ideal for high-frequency trading.',
-    },
-    {
-        feature: "Fiat Integration",
-        exchange: "PRO: The primary bridge between traditional finance and crypto. Easily deposit and withdraw fiat currency (USD, EUR, etc.) via bank transfer or credit card.",
-        wallet: "CON: Very limited to no direct fiat integration. You typically must first buy crypto on an exchange and then transfer it to your wallet.",
-    },
-    {
-        feature: "Anonymity & Privacy",
-        exchange: "CON: Zero anonymity. All major exchanges require KYC (Know Your Customer) verification, linking your identity to your transactions.",
-        wallet: "PRO: High degree of pseudonymity. Your wallet address is a string of characters not directly linked to your real-world identity unless you choose to link it.",
-    },
-    {
-        feature: "Access to DeFi/Web3",
-        exchange: "CON: Very limited, sandboxed access. Exchanges are slowly adding DeFi features, but it's a curated, controlled experience.",
-        wallet: "PRO: The native gateway to the entire Web3 ecosystem. Connect directly to any DeFi protocol, NFT marketplace, or dApp permissionlessly.",
-    },
-];
-
-// Icons
+// --- Icons ---
 const ProIcon = () => (
     <svg className="w-5 h-5 text-green-500 mr-2 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
@@ -54,10 +13,30 @@ const ConIcon = () => (
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
     </svg>
 );
-const FeatureCard = ({ title, children }: { title: string, children: React.ReactNode }) => (
-    <div className="bg-white/5 border border-white/10 rounded-lg p-6 h-full">
+const OracleIcon = () => <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 mb-4 text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" /></svg>;
+const VaultIcon = () => <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 mb-4 text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4" /></svg>;
+const EngineIcon = () => <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 mb-4 text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v.01M12 12v.01M12 12v- .01M12 16v.01M12 16v-.01M12 16c-1.11 0-2.08-.402-2.599-1M12 16V7m0 9c1.657 0 3-.895 3-2s-1.343-2-3-2-3-.895-3-2 1.343-2 3-2" /></svg>;
+const TokenIcon = () => <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 mb-4 text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M12 11c0 3.517-1.009 6.789-2.756 9.362m-3.603-3.603A10.003 10.003 0 0112 2c5.523 0 10 4.477 10 10 0 .273-.01.543-.031.812M12 11a3 3 0 100-6 3 3 0 000 6z" /></svg>;
+
+// --- Reusable Components ---
+const FeatureCard = ({ title, children, icon }: { title: string; children: React.ReactNode; icon?: React.ReactNode }) => (
+    <div className="bg-white/5 border border-white/10 rounded-lg p-6 h-full text-left">
+        {icon}
         <h3 className="text-lg font-bold mb-2 text-white">{title}</h3>
         <p className="text-gray-400">{children}</p>
+    </div>
+);
+
+const PillarCard = ({ title, icon, newFeature, children }: { title: string, icon: React.ReactNode, newFeature: string, children: React.ReactNode}) => (
+    <div className="bg-white/5 border border-white/10 rounded-lg p-8">
+        <div className="flex items-start">
+            <div className="mr-6 shrink-0">{icon}</div>
+            <div>
+                 <h3 className="text-2xl font-bold text-white">{title}</h3>
+                 <p className="mt-2 text-sm text-blue-400 font-semibold uppercase tracking-wide">{newFeature}</p>
+                 <div className="mt-4 text-gray-300 space-y-4 prose prose-invert">{children}</div>
+            </div>
+        </div>
     </div>
 );
 
@@ -68,126 +47,145 @@ const Home = ({ setCurrentPage }: { setCurrentPage: (page: string) => void }) =>
     <>
         <main className="py-20 sm:py-32 text-center">
             <h2 className="text-4xl sm:text-6xl font-extrabold text-white tracking-tight leading-tight">
-                Crypto Exchanges vs. Wallets
+                The Hybrid Intelligence Exchange
             </h2>
             <p className="mt-4 text-xl sm:text-2xl text-gray-400 max-w-3xl mx-auto">
-                The definitive comparison. At their core, the difference is about who holds the keys. This single point dictates the entire spectrum of pros and cons.
+                Merging high-performance trading with a layer of AI-driven, on-chain analytics that no one else offers. Welcome to the "Glass Box" of crypto.
             </p>
             <div className="mt-10 flex justify-center gap-4">
-                <a href="#comparison" className="bg-blue-600 text-white font-semibold py-3 px-8 rounded-lg hover:bg-blue-700 transition-colors">
-                    See Comparison
-                </a>
-                <button onClick={() => setCurrentPage('learn')} className="bg-white/10 text-white font-semibold py-3 px-8 rounded-lg hover:bg-white/20 transition-colors">
-                    Learn More
+                <button onClick={() => setCurrentPage('blueprint')} className="bg-blue-600 text-white font-semibold py-3 px-8 rounded-lg hover:bg-blue-700 transition-colors">
+                    View The Blueprint
+                </button>
+                <button onClick={() => setCurrentPage('app')} className="bg-white/10 text-white font-semibold py-3 px-8 rounded-lg hover:bg-white/20 transition-colors">
+                    Launch App
                 </button>
             </div>
         </main>
 
-        <section className="py-16">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
-                <FeatureCard title="Crypto Exchange (Custodial)">
-                    A company holds your private keys on your behalf. You have an account with a password, similar to a bank. Examples: Binance, Coinbase, Kraken.
-                </FeatureCard>
-                <FeatureCard title="Crypto Wallet (Non-Custodial)">
-                    You, and only you, hold the private keys. You are your own bank. Examples: MetaMask (software), Ledger (hardware), Trust Wallet (software).
-                </FeatureCard>
-            </div>
-        </section>
-
-        <section id="comparison" className="py-16">
-            <h3 className="text-3xl font-bold text-center mb-12 text-white">
-                Detailed Breakdown
+        <section id="pillars" className="py-16">
+             <h3 className="text-3xl font-bold text-center mb-12 text-white">
+                Four Pillars of Innovation
             </h3>
-            <div className="overflow-x-auto rounded-lg border border-white/10">
-                <table className="min-w-full divide-y divide-white/10">
-                    <thead className="bg-white/5">
-                        <tr>
-                            <th scope="col" className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-white sm:pl-6">Feature</th>
-                            <th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold text-white">Crypto Exchanges (Custodial)</th>
-                            <th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold text-white">Crypto Wallets (Non-Custodial)</th>
-                        </tr>
-                    </thead>
-                    <tbody className="divide-y divide-white/10 bg-[#0f0f0f]">
-                        {comparisonData.map((item) => (
-                            <tr key={item.feature}>
-                                <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-white sm:pl-6">{item.feature}</td>
-                                <td className="whitespace-normal px-3 py-4 text-sm text-gray-400">
-                                    <div className="flex items-start">
-                                        {item.exchange.startsWith("CON:") ? <ConIcon /> : <ProIcon />}
-                                        <span>{item.exchange.substring(4).trim()}</span>
-                                    </div>
-                                </td>
-                                <td className="whitespace-normal px-3 py-4 text-sm text-gray-400">
-                                    <div className="flex items-start">
-                                        {item.wallet.startsWith("CON:") ? <ConIcon /> : <ProIcon />}
-                                        <span>{item.wallet.substring(4).trim()}</span>
-                                    </div>
-                                </td>
-                            </tr>
-                        ))}
-                    </tbody>
-                </table>
-            </div>
-        </section>
-
-        <section className="py-20">
-            <h3 className="text-3xl font-bold text-center mb-12 text-white">Summary</h3>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
-                <div className="bg-white/5 border border-white/10 rounded-lg p-6">
-                    <h4 className="font-bold text-lg text-white mb-2">Use an Exchange for:</h4>
-                    <ul className="list-disc list-inside text-gray-400 space-y-1">
-                        <li>On-ramping from fiat</li>
-                        <li>Active trading, and convenience</li>
-                        <li>Treat it like a stock brokerage.</li>
-                        <li><span className="font-bold text-red-400">Don't leave your life savings there.</span></li>
-                    </ul>
-                </div>
-                <div className="bg-white/5 border border-white/10 rounded-lg p-6">
-                    <h4 className="font-bold text-lg text-white mb-2">Use a Wallet for:</h4>
-                    <ul className="list-disc list-inside text-gray-400 space-y-1">
-                        <li>Long-term storage (HODLing)</li>
-                        <li>True ownership</li>
-                        <li>Interacting with the decentralized web (DeFi, NFTs)</li>
-                        <li><span className="font-bold text-green-400">Treat it like your personal vault.</span></li>
-                    </ul>
-                </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-7xl mx-auto text-center">
+                <FeatureCard title="The Alpha Oracle" icon={<OracleIcon />}>
+                    Integrated, real-time on-chain intelligence. See what whales and smart money are doing, directly on your chart.
+                </FeatureCard>
+                 <FeatureCard title="The Strategy Vault" icon={<VaultIcon/>}>
+                    The evolution of social trading. Subscribe to verifiable, on-chain strategies, not just traders.
+                </FeatureCard>
+                 <FeatureCard title="Hybrid Liquidity" icon={<EngineIcon/>}>
+                    Deep CEX liquidity for major pairs and seamless, aggregated DEX access for the long-tail. All in one place.
+                </FeatureCard>
+                 <FeatureCard title="The $ALPHA Token" icon={<TokenIcon/>}>
+                    A utility token with a purpose. Stake for tiered access to alpha, fee reductions, and governance rights.
+                </FeatureCard>
             </div>
         </section>
     </>
 );
+
+const Blueprint = () => (
+    <div className="py-20 sm:py-32 max-w-5xl mx-auto">
+         <h2 className="text-4xl sm:text-5xl font-extrabold text-white tracking-tight text-center">The Blueprint for Alpha Access</h2>
+         <p className="mt-4 text-xl text-center text-gray-400 max-w-3xl mx-auto">
+           This is what the world hasn't done yet. We're building an intelligence tool that gives traders a provable edge.
+         </p>
+         <div className="mt-20 space-y-12">
+            <PillarCard title="The Alpha Oracle" icon={<OracleIcon/>} newFeature="Integrated On-Chain Intelligence">
+                <p>Every other exchange shows you a price chart. We are the first to overlay actionable, real-time on-chain data directly onto the trading interface.</p>
+                <ul>
+                    <li><strong>Live Whale Tracking:</strong> See alerts like "$50M BTC just moved from a whale wallet to Binance" or "A dormant 8-year-old wallet just woke up."</li>
+                    <li><strong>Smart Money Flow:</strong> Using wallet-tagging, we show you when "smart money" is accumulating or distributing a token via a simple Inflow/Outflow indicator.</li>
+                    <li><strong>DeFi Event Integration:</strong> Get critical alerts for token unlocks, liquidity events, and other fundamental on-chain catalysts.</li>
+                </ul>
+                <p className="font-semibold text-blue-300">Currently, traders use separate, expensive services like Nansen or Arkham for this data. We build it natively into the trading experience.</p>
+            </PillarCard>
+
+            <PillarCard title="The Strategy Vault" icon={<VaultIcon/>} newFeature="Social Trading 2.0">
+                <p>Copy-trading exists, but it's a black box. We introduce non-custodial, on-chain strategy vaults.</p>
+                 <ul>
+                    <li><strong>How it Works:</strong> A top trader encodes their strategy into a non-custodial smart contract (e.g., "Buy ETH when 'Smart Money' inflow exceeds $10M/hr").</li>
+                    <li><strong>User Participation:</strong> Users deposit funds into the vault's smart contract. The funds never leave their control but automatically execute the strategy. Withdraw anytime.</li>
+                    <li><strong>Transparency & Trust:</strong> The strategy’s rules and performance are all publicly verifiable on the blockchain, eliminating trust issues.</li>
+                </ul>
+                <p className="font-semibold text-blue-300">It's the first platform to merge social trading with the security and transparency of on-chain smart contracts.</p>
+            </PillarCard>
+            
+            <PillarCard title="The Hybrid Liquidity Engine" icon={<EngineIcon/>} newFeature="Unified CEX + DEX Liquidity">
+                 <p>Users shouldn't have to choose between the deep liquidity of a CEX and the vast token selection of a DEX. We provide both seamlessly.</p>
+                 <ul>
+                    <li><strong>For Major Pairs (BTC, ETH):</strong> We use our own high-speed Central Limit Order Book (CLOB) for tight spreads and instant execution.</li>
+                    <li><strong>For Long-Tail Assets:</strong> Our engine automatically queries top DEXs (like Uniswap) through a smart order router to find the best price and execute the trade on the user's behalf.</li>
+                </ul>
+                <p className="font-semibold text-blue-300">No single exchange offers both a native, high-performance order book and seamless, integrated access to the entire on-chain market.</p>
+            </PillarCard>
+
+             <PillarCard title="The 'Alpha Access' Token ($ALPHA)" icon={<TokenIcon/>} newFeature="A Utility Token with a Purpose">
+                 <p>The platform's native token, $ALPHA, is the key to unlocking the platform's core features, creating a merit-based system.</p>
+                 <ul>
+                    <li><strong>Tiered Access:</strong> Staking $ALPHA unlocks tiers of data from the "Alpha Oracle" and access to top Strategy Vaults.</li>
+                    <li><strong>Fee Reduction:</strong> Pay trading fees in $ALPHA for a discount.</li>
+                    <li><strong>Governance:</strong> $ALPHA holders vote on new on-chain metrics and featured traders.</li>
+                </ul>
+                <p className="font-semibold text-blue-300">It turns the platform into a gamified, self-improving ecosystem that rewards skill and participation.</p>
+            </PillarCard>
+
+         </div>
+    </div>
+);
+
 
 const About = () => (
     <div className="py-20 sm:py-32 max-w-4xl mx-auto">
         <h2 className="text-4xl sm:text-5xl font-extrabold text-white tracking-tight text-center">About AlphaAccess</h2>
         <div className="mt-12 text-lg text-gray-300 space-y-6 prose prose-invert lg:prose-xl mx-auto">
             <p>
-                At AlphaAccess, we are building the next generation of digital asset exchange. Our vision originates from a simple, yet powerful conviction: the future of finance should be open, transparent, and accessible to everyone. We observed the existing landscape of cryptocurrency exchanges and saw a critical gap between the user-friendly, centralized platforms and the powerful, sovereign world of decentralized finance (DeFi).
+                At AlphaAccess, we are building the next generation of digital asset exchange. Our vision originates from a simple, yet powerful conviction: the future of finance should be open, transparent, and accessible to everyone. We're building a "Glass Box," not a black box.
             </p>
             <p>
-                Our mission is to bridge that gap. We are creating a hybrid platform that offers the best of both worlds—the ease of use, deep liquidity, and fiat gateways of a traditional exchange, combined with the self-custody, transparency, and permissionless innovation of DeFi. We believe you shouldn't have to choose between convenience and control.
+                Our mission is to bridge the critical gap between user-friendly centralized platforms and the powerful, sovereign world of DeFi. We are creating a hybrid intelligence platform that offers the best of both worlds—the ease of use of a traditional exchange, combined with the self-custody and transparency of DeFi, all enhanced by our unique <span className="font-bold text-blue-400">Alpha Oracle</span>. We believe you shouldn't have to choose between convenience and control.
             </p>
             <p>
-                AlphaAccess is more than just a trading venue; it's a gateway to the decentralized economy. Whether you're a seasoned trader looking for advanced tools or a newcomer taking your first steps into crypto, our platform is designed to empower you with the knowledge and tools you need to navigate the exciting world of digital assets securely and confidently. Join us in building a more equitable financial future.
+                AlphaAccess is more than just a trading venue; it's an intelligence tool designed to empower you with a provable edge. Join us in building a more equitable and transparent financial future.
             </p>
         </div>
     </div>
 );
 
 const Learn = () => (
-    <div className="py-20 sm:py-32 max-w-4xl mx-auto">
-        <h2 className="text-4xl sm:text-5xl font-extrabold text-white tracking-tight text-center">Learn Crypto</h2>
-        <div className="mt-12 grid grid-cols-1 md:grid-cols-2 gap-8">
+    <div className="py-20 sm:py-32 max-w-5xl mx-auto">
+        <h2 className="text-4xl sm:text-5xl font-extrabold text-white tracking-tight text-center">Learn</h2>
+        <p className="mt-4 text-xl text-center text-gray-400">Foundational concepts and the AlphaAccess edge.</p>
+        
+        <h3 className="text-2xl font-bold text-white tracking-tight mt-16 mb-8">Crypto Fundamentals</h3>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             <FeatureCard title="What is Blockchain?">
-                A blockchain is a decentralized, distributed, and oftentimes public, digital ledger consisting of records called blocks that is used to record transactions across many computers so that any involved block cannot be altered retroactively, without the alteration of all subsequent blocks.
+                A decentralized, distributed digital ledger used to record transactions across many computers so that records cannot be altered retroactively without the alteration of all subsequent blocks.
             </FeatureCard>
             <FeatureCard title="What is Bitcoin?">
-                Bitcoin is a cryptocurrency, a digital asset designed to work as a medium of exchange that uses cryptography to control its creation and management, rather than relying on central authorities.
+                A cryptocurrency designed to work as a medium of exchange that uses cryptography to control its creation and management, rather than relying on central authorities.
             </FeatureCard>
-            <FeatureCard title="What is Ethereum?">
-                Ethereum is a decentralized, open-source blockchain with smart contract functionality. Ether (ETH) is the native cryptocurrency of the platform. It is the second-largest cryptocurrency by market capitalization, after Bitcoin.
+             <FeatureCard title="What is Ethereum?">
+                A decentralized, open-source blockchain with smart contract functionality. Ether (ETH) is the native cryptocurrency of the platform.
             </FeatureCard>
              <FeatureCard title="Understanding Gas Fees">
-                Gas fees are payments made by users to compensate for the computing energy required to process and validate transactions on the Ethereum blockchain. 'Gas limit' refers to the maximum amount of gas you're willing to spend on a transaction.
+                Payments made by users to compensate for the computing energy required to process and validate transactions on a blockchain.
+            </FeatureCard>
+        </div>
+
+        <h3 className="text-2xl font-bold text-white tracking-tight mt-20 mb-8">The AlphaAccess Edge</h3>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <FeatureCard title="On-Chain Intelligence">
+                The process of analyzing public blockchain data to uncover insights about market sentiment, whale activity, and smart money movements. AlphaAccess integrates this directly into your trading view.
+            </FeatureCard>
+            <FeatureCard title="Strategy Vaults">
+               A non-custodial smart contract that automatically executes a predefined trading strategy. Users can deposit funds to subscribe to a strategy, and its performance is fully transparent and verifiable on-chain.
+            </FeatureCard>
+             <FeatureCard title="Hybrid Liquidity">
+                A system that combines a Central Limit Order Book (CLOB) for high-speed trading of major assets with a DEX Aggregator that finds the best prices for thousands of other tokens across the DeFi ecosystem.
+            </FeatureCard>
+             <FeatureCard title="Utility Tokens ($ALPHA)">
+                A digital asset whose value is tied to its utility within a specific ecosystem. The $ALPHA token grants access to premium data, reduces fees, and gives holders a say in the platform's future.
             </FeatureCard>
         </div>
     </div>
@@ -212,6 +210,8 @@ export default function Page() {
         switch (currentPage) {
             case "home":
                 return <Home setCurrentPage={setCurrentPage} />;
+            case "blueprint":
+                return <Blueprint />;
             case "about":
                 return <About />;
             case "learn":
@@ -237,7 +237,7 @@ export default function Page() {
     return (
         <div className="font-sans bg-[#0a0a0a] text-gray-200 min-h-screen">
             <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-                <header className="py-4 flex justify-between items-center border-b border-white/10">
+                <header className="py-4 flex justify-between items-center border-b border-white/10 sticky top-0 bg-[#0a0a0a]/80 backdrop-blur-lg z-50">
                     <div className="flex items-center gap-3 cursor-pointer" onClick={() => setCurrentPage('home')}>
                         <svg width="32" height="32" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <rect width="120" height="120" rx="20" fill="white" />
@@ -250,6 +250,7 @@ export default function Page() {
                     </div>
                     <nav className="flex items-center gap-2 sm:gap-4">
                         <NavLink pageName="home">Home</NavLink>
+                        <NavLink pageName="blueprint">Blueprint</NavLink>
                         <NavLink pageName="about">About</NavLink>
                         <NavLink pageName="learn">Learn</NavLink>
                     </nav>
